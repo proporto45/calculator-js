@@ -1,0 +1,27 @@
+@import "bourbon/bourbon";
+@import "neat/neat";
+
+section.header_container {
+  @include outer-container;
+
+  div {
+    @include span-columns(2);
+    height: 5em;
+  }
+  button.__adding-button_item {
+    @include span-columns(2);
+    height: 3em;
+  }
+}
+
+section.body_container {
+  @include outer-container;
+  .__table-header {
+    @include fill-parent();
+    @include row(table);
+  }
+  .__table-item {
+    border: solid 5px;
+    @include span-columns(4);
+  }
+}
