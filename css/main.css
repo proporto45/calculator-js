@@ -22,7 +22,7 @@ section.header_container div {
   float: left;
   display: block;
   margin-right: 2.35765%;
-  width: 14.70196%;
+  width: 23.23176%;
   height: 5em;
 }
 
@@ -54,7 +54,7 @@ section.body_container::after {
   display: block;
 }
 
-section.body_container .__table-header {
+section.body_container .table-container {
   width: 100%;
   display: table;
   width: 100%;
@@ -62,7 +62,9 @@ section.body_container .__table-header {
 }
 
 section.body_container .__table-item {
-  border: solid 5px;
+  border: solid 1px;
   display: table-cell;
   width: 33.33333%;
+  padding: 2.35765%;
+  text-align: center;
 }

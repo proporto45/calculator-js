@@ -5,7 +5,7 @@ section.header_container {
   @include outer-container;
 
   div {
-    @include span-columns(2);
+    @include span-columns(3);
     height: 5em;
   }
   button.__adding-button_item {
@@ -16,12 +16,14 @@ section.header_container {
 
 section.body_container {
   @include outer-container;
-  .__table-header {
+  .table-container {
     @include fill-parent();
     @include row(table);
   }
   .__table-item {
-    border: solid 5px;
+    border: solid 1px;
     @include span-columns(4);
+    @include pad();
+    text-align: center;
   }
 }
