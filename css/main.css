@@ -1,70 +1,70 @@
 html {
-  box-sizing: border-box;
-}
+  box-sizing: border-box; }
 
 *, *::after, *::before {
-  box-sizing: inherit;
-}
+  box-sizing: inherit; }
 
 section.header_container {
   max-width: 1200px;
   margin-left: auto;
-  margin-right: auto;
-}
-
-section.header_container::after {
-  clear: both;
-  content: "";
-  display: block;
-}
-
-section.header_container div {
-  float: left;
-  display: block;
-  margin-right: 2.35765%;
-  width: 23.23176%;
-  height: 5em;
-}
-
-section.header_container div:last-child {
-  margin-right: 0;
-}
-
-section.header_container button.__adding-button_item {
-  float: left;
-  display: block;
-  margin-right: 2.35765%;
-  width: 14.70196%;
-  height: 3em;
-}
-
-section.header_container button.__adding-button_item:last-child {
-  margin-right: 0;
-}
+  margin-right: auto; }
+  section.header_container::after {
+    clear: both;
+    content: "";
+    display: block; }
+  section.header_container div {
+    float: left;
+    display: block;
+    margin-right: 2.35765%;
+    width: 23.23176%;
+    height: 5em; }
+    section.header_container div:last-child {
+      margin-right: 0; }
+  section.header_container button.__adding-button_item {
+    float: left;
+    display: block;
+    margin-right: 2.35765%;
+    width: 23.23176%;
+    height: 3.4em; }
+    section.header_container button.__adding-button_item:last-child {
+      margin-right: 0; }
 
 section.body_container {
   max-width: 1200px;
   margin-left: auto;
-  margin-right: auto;
-}
+  margin-right: auto; }
+  section.body_container::after {
+    clear: both;
+    content: "";
+    display: block; }
+  section.body_container .table-container {
+    width: 100%;
+    display: table;
+    width: 100%;
+    table-layout: fixed; }
+  section.body_container .__table-item {
+    border: solid 1px;
+    display: table-cell;
+    width: 33.33333%;
+    padding: 2.35765%;
+    text-align: center; }
 
-section.body_container::after {
-  clear: both;
-  content: "";
-  display: block;
-}
+section.footer_container {
+  padding: 30px 0px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto; }
+  section.footer_container::after {
+    clear: both;
+    content: "";
+    display: block; }
+  section.footer_container div {
+    display: table-cell;
+    width: 50%;
+    height: 5em; }
+  section.footer_container button.__discount-button_item {
+    display: table-cell;
+    width: 25%;
+    height: 3.4em; }
 
-section.body_container .table-container {
-  width: 100%;
-  display: table;
-  width: 100%;
-  table-layout: fixed;
-}
-
-section.body_container .__table-item {
-  border: solid 1px;
-  display: table-cell;
-  width: 33.33333%;
-  padding: 2.35765%;
-  text-align: center;
-}
+/*# sourceMappingURL=main.css.map */
