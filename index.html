@@ -11,23 +11,18 @@
     <h3 class="title-item">Добавить продукт</h3>
     <div class="input-header product-block">
         <span class="input-header __product-title_item">Продукт<br></span>
-        <input type="text"/>
+        <input class="js-product-input_item input-header __product-input_item" type="text"/>
     </div>
     <div class="input-header price-block">
         <span class="input-header __price-title_item">Цена<br></span>
-        <input type="number"/>
+        <input class="js-price-input_item input-header __price-input_item" type="number"/>
     </div>
     <button class="js-adding-button_item input-header __adding-button_item" type="button"><b>Добавить</b></button>
+    <button class="js-removing-button_item input-header __removing-button_item" type="button"><b>Очистить корзину</b></button>
 </section>
 <section class="body_container">
     <h3>Корзина</h3>
-
-    <!--<div class="table-container">-->
-        <!--<div class="table-container __table-item"><span>Продукт</span></div>-->
-        <!--<div class="table-container __table-item"><span>Цена</span></div>-->
-        <!--<div class="table-container __table-item"><span>Цена со скидкой</span></div>-->
-    <!--</div>-->
-    <table class="table-container">
+    <table class="js-table-container table-container">
         <tbody>
         <tr>
             <th class="table-container __table-item">Продукт</th>
@@ -41,11 +36,11 @@
 <section class="footer_container input-footer">
     <div class="input-footer discount_block">
         <span class="input-footer __discount-title_item">Применить скидку</span>
-        <input type="number" />
+        <input class="js-discount-input_item input-header __discount-input_item" type="number" />
     </div>
     <button class="js-discount-button_item input-footer __discount-button_item"><b>Применить</b></button>
 </section>
-<script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>

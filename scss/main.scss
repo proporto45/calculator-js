@@ -12,6 +12,10 @@ section.header_container {
     @include span-columns(3);
     height: 3.4em;
   }
+  button.__removing-button_item {
+    @include span-columns(3);
+    height: 3.4em;
+  }
 }
 
 section.body_container {
