@@ -96,7 +96,6 @@ CalcDiscount.prototype = {
     addDiscount: function (priceDiscount) {
         var self = this;
         self.discount = 0;
-        console.log(self.sorted);
         for (var x = 0; x < self.sorted.length; x++) {
             self.discount = Math.round(parseInt(priceDiscount) / (self.pricesSum / parseInt(self.sorted[x])));
             if (self.discount == 0  && x != (self.sorted.length - 1)) {
@@ -107,8 +106,6 @@ CalcDiscount.prototype = {
                 self.discount--;
                 self.discountZero = false;
             }
-            console.log(self.discount);
-            console.log(self.pricesSum);
             self.discountPrice = parseInt(self.sorted[x]) - Math.round(self.discount);
             $('tr.price_' + self.sorted[x] + ' > td:last-child').html(self.discountPrice);
         }
