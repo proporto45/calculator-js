@@ -53,6 +53,7 @@ CalcDiscount.prototype = {
                 '<td class="table-container __table-item">' + price + '</td>' +
                 '<td class="table-container __table-item"></td>' +
                 '</tr>';
+        var adding_action_one, adding_action_two;
         $('.js-table-container > tbody').append(productTemplate);
         self.productsList[name] = price;
         $('.js-product-input_item').val('');
@@ -63,7 +64,9 @@ CalcDiscount.prototype = {
             return self.productsList[a] - self.productsList[b]
         });
         for (var i = 0; i < self.sorted.length; i++) {
-            self.pricesSum += parseInt(self.sorted[i]);
+            adding_action_one = parseInt(self.sorted[i]);
+            adding_action_two = self.productsList[adding_action_one];
+            self.pricesSum += parseInt(adding_action_two);
         }
     },
     removeProductItems: function () {
@@ -81,11 +84,12 @@ CalcDiscount.prototype = {
         var self = this;
         self.listLength = Object.keys(self.productsList).length;
         self.productsDiscount = $('.js-discount-input_item').val();
+        self.productsDiscount = parseInt(self.productsDiscount);
         if (self.pricesSum <= self.productsDiscount) {
             alert('Такой скидки не бывает =)');
         }
         else if (self.listLength != 0 && self.productsDiscount != '') {
-            self.addDiscount(self.productsDiscount);
+            self.addDiscount();
         } else if (self.listLength == 0) {
             alert('Для применения скидки, сначала необходимо заполнить поля Продукт и Цена');
         }
@@ -93,21 +97,29 @@ CalcDiscount.prototype = {
             alert('Для применения скидки, сначала необходимо ввести значение Скидки');
         }
     },
-    addDiscount: function (priceDiscount) {
+    addDiscount: function () {
         var self = this;
-        self.discount = 0;
-        for (var x = 0; x < self.sorted.length; x++) {
-            self.discount = Math.round(parseInt(priceDiscount) / (self.pricesSum / parseInt(self.sorted[x])));
-            if (self.discount == 0  && x != (self.sorted.length - 1)) {
-                self.discount = 1;
-                self.discountZero = true;
-            }
-            if (self.discountZero && x == (self.sorted.length - 1)) {
+        self.productsDiscount = parseInt(self.productsDiscount);
+        var action_one, action_two, action_three, action_length;
+        action_length = self.sorted.length;
+        for (var x = 0; x < action_length; x++) {
+            action_one = parseInt(self.sorted[x]);
+            action_two = parseInt(self.productsList[action_one]);
+            action_three = self.pricesSum / action_two;
+            self.discount = Math.round(self.productsDiscount / action_three);
+             if (x == (action_length - 1) && self.discountZero) {
                 self.discount--;
                 self.discountZero = false;
+                 console.log(self.discountZero);
             }
-            self.discountPrice = parseInt(self.sorted[x]) - Math.round(self.discount);
-            $('tr.price_' + self.sorted[x] + ' > td:last-child').html(self.discountPrice);
+            else if (self.discount == 0 && x != (self.sorted.length - 1)) {
+                self.discountZero = true;
+                console.log(self.discountZero);
+                self.discount++;
+            }
+            self.discountPrice = action_two - self.discount;
+            console.warn(self.sorted);
+            $('tr.price_' + action_two + ' > td:last-child').html(self.discountPrice);
         }
 
     }
