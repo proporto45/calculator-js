@@ -53,21 +53,16 @@ CalcDiscount.prototype = {
                 '<td class="table-container __table-item">' + price + '</td>' +
                 '<td class="table-container __table-item"></td>' +
                 '</tr>';
-        var adding_action_one, adding_action_two;
+
         $('.js-table-container > tbody').append(productTemplate);
         self.productsList[name] = price;
         $('.js-product-input_item').val('');
         $('.js-price-input_item').val('');
-        self.pricesSum = 0;
         self.sorted = 0;
         self.sorted = Object.keys(self.productsList).sort(function (a, b) {
-            return self.productsList[a] - self.productsList[b]
+            return self.productsList[b] - self.productsList[a]
         });
-        for (var i = 0; i < self.sorted.length; i++) {
-            adding_action_one = parseInt(self.sorted[i]);
-            adding_action_two = self.productsList[adding_action_one];
-            self.pricesSum += parseInt(adding_action_two);
-        }
+
     },
     removeProductItems: function () {
         var self = this,
@@ -82,9 +77,15 @@ CalcDiscount.prototype = {
     },
     checkDiscountField: function () {
         var self = this;
+        var adding_action_one, adding_action_two;
         self.listLength = Object.keys(self.productsList).length;
         self.productsDiscount = $('.js-discount-input_item').val();
         self.productsDiscount = parseInt(self.productsDiscount);
+        for (var i = 0; i < self.sorted.length; i++) {
+            adding_action_one = self.sorted[i];
+            adding_action_two = self.productsList[adding_action_one];
+            self.pricesSum += parseInt(adding_action_two);
+        }
         if (self.pricesSum <= self.productsDiscount) {
             alert('Такой скидки не бывает =)');
         }
@@ -99,26 +100,23 @@ CalcDiscount.prototype = {
     },
     addDiscount: function () {
         var self = this;
-        self.productsDiscount = parseInt(self.productsDiscount);
-        var action_one, action_two, action_three, action_length;
+        var action_one = 0, action_two = 0, action_three = 0, action_length = 0;
         action_length = self.sorted.length;
         for (var x = 0; x < action_length; x++) {
-            action_one = parseInt(self.sorted[x]);
+            action_one = self.sorted[x];
             action_two = parseInt(self.productsList[action_one]);
             action_three = self.pricesSum / action_two;
-            self.discount = Math.round(self.productsDiscount / action_three);
-             if (x == (action_length - 1) && self.discountZero) {
+            self.discount = Math.floor(self.productsDiscount / action_three);
+            console.warn(self.discount);
+                console.log(self.pricesSum + ' - ' + action_one + ' - ' + action_two + ' - ' + action_three + ' - ' + self.discount);
+            if (self.discount == 0) {
+                self.discountZero = true;
+                self.discount++;
+            } else if (x == (action_length - 1) && self.discount != 0 && self.discountZero) {
                 self.discount--;
                 self.discountZero = false;
-                 console.log(self.discountZero);
-            }
-            else if (self.discount == 0 && x != (self.sorted.length - 1)) {
-                self.discountZero = true;
-                console.log(self.discountZero);
-                self.discount++;
             }
             self.discountPrice = action_two - self.discount;
-            console.warn(self.sorted);
             $('tr.price_' + action_two + ' > td:last-child').html(self.discountPrice);
         }
 
