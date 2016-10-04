@@ -34,7 +34,7 @@ var CalcDiscount = function () {
     else {
         return new CalcDiscount();
     }
-}
+};
 CalcDiscount.prototype = {
     checkProductFields: function () {
         var self = this;
@@ -60,7 +60,7 @@ CalcDiscount.prototype = {
         $('.js-price-input_item').val('');
         self.sorted = 0;
         self.sorted = Object.keys(self.productsList).sort(function (a, b) {
-            return self.productsList[b] - self.productsList[a]
+            return self.productsList[a] - self.productsList[b]
         });
 
     },
@@ -78,6 +78,7 @@ CalcDiscount.prototype = {
     checkDiscountField: function () {
         var self = this;
         var adding_action_one, adding_action_two;
+        self.pricesSum = 0;
         self.listLength = Object.keys(self.productsList).length;
         self.productsDiscount = $('.js-discount-input_item').val();
         self.productsDiscount = parseInt(self.productsDiscount);
@@ -100,25 +101,33 @@ CalcDiscount.prototype = {
     },
     addDiscount: function () {
         var self = this;
-        var action_one = 0, action_two = 0, action_three = 0, action_length = 0;
-        action_length = self.sorted.length;
-        for (var x = 0; x < action_length; x++) {
+        var action_one = 0, action_two = 0, action_three = 0, action_sum = 0;
+
+        for (var x = 0; x < self.sorted.length; x++) {
             action_one = self.sorted[x];
             action_two = parseInt(self.productsList[action_one]);
             action_three = self.pricesSum / action_two;
-            self.discount = Math.floor(self.productsDiscount / action_three);
-            console.warn(self.discount);
-                console.log(self.pricesSum + ' - ' + action_one + ' - ' + action_two + ' - ' + action_three + ' - ' + self.discount);
-            if (self.discount == 0) {
-                self.discountZero = true;
-                self.discount++;
-            } else if (x == (action_length - 1) && self.discount != 0 && self.discountZero) {
-                self.discount--;
-                self.discountZero = false;
+            self.discount = self.productsDiscount / action_three;
+
+
+            if (self.discount < 0.5) {
+                action_sum += 1 - self.discount;
+                self.discount = 1;
+            }
+            else if (self.discount < 1 && self.discount >= 0.5) {
+                action_sum += self.discount - Math.floor(self.discount);
+                self.discount = 1;
+            }
+            if ((self.discount - Math.floor(self.discount)) > 0 && self.discount > 1) {
+                action_sum += self.discount - Math.floor(self.discount);
+                self.discount = Math.floor(self.discount);
+            }
+
+            if (x == (self.sorted.length - 1) && action_sum != 0) {
+                self.discount += Math.round(action_sum);
             }
             self.discountPrice = action_two - self.discount;
             $('tr.price_' + action_two + ' > td:last-child').html(self.discountPrice);
         }
-
     }
 };
